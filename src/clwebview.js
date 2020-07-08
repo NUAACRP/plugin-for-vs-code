@@ -22,7 +22,7 @@ function getWebViewContent(context, templatePath) {
 }
 
 
-
+//feature-1
 
 /**
  * 执行回调函数
@@ -52,14 +52,14 @@ const messageHandler = {
         var text = util.getTextLine();
         invokeCallback(global.panel, message, text);
     },
-    insertSnippet(global, message){
-        
+    insertSnippet(global, message) {
+
         console.log("开始复制" + message.snippet);
         var text = '\n' + message.snippet;
         var editor = global.editor;
         let selection = editor.selection;
-        editor.edit(editBuilder=> {
-            text = text.replace(/[\r\n]/g,"");      
+        editor.edit(editBuilder => {
+            text = text.replace(/[\r\n]/g, "");
             editBuilder.insert(selection.start, text);
         });
         console.log("复制成功");
@@ -102,9 +102,9 @@ module.exports = function(context) {
         editor = vscode.window.activeTextEditor;
         var text = util.getTextLine();
         console.log(text);
-        if(panel){
+        if (panel) {
             panel.reveal(vscode.ViewColumn.Two);
-        }else{
+        } else {
             panel = vscode.window.createWebviewPanel(
                 'testWebview', // viewType
                 "CodeRecommendation", // 视图标题
@@ -118,7 +118,7 @@ module.exports = function(context) {
             //panel.webview.html = getWebViewContent(context, 'src/view/test-webview.html');
             panel.webview.html = getWebViewContent(context, 'src/view/clrecommendation.html');
         }
-        var global = {panel, editor};
+        var global = { panel, editor };
         panel.webview.postMessage(text);
         panel.webview.onDidReceiveMessage(message => {
             if (messageHandler[message.cmd]) {
