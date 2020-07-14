@@ -63,15 +63,15 @@
         </v-contextmenu>
         <!--分页/代码框-->
         <!-- <div v-contextmenu:contextmenu> -->
-            <div v-for="item in codeData" :key="item.id" class='codeBox' v-contextmenu:contextmenu @contextmenu="additem(item)">
-                <!--h3 style="text-align: left">[{{ item.language }}]</h3 -->
-                <div v-highlight>
-                    <pre>
+        <div v-for="item in codeData" :key="item.id" class='codeBox' v-contextmenu:contextmenu @contextmenu="additem(item)">
+            <!--h3 style="text-align: left">[{{ item.language }}]</h3 -->
+            <div v-highlight>
+                <pre>
                     <code  v-text="item" style="height: 28vh" align="left"></code>
                 </pre>
-                </div>
-                <!-- {{ item.content }} -->
             </div>
+            <!-- {{ item.content }} -->
+        </div>
         <!-- </div> -->
     </div>
     <div id='page'>
@@ -141,7 +141,7 @@
                 query: "Enter something...",
                 display: true
             },
-            methods: {                
+            methods: {
                 search() {
                     vm.websocketsend(this.query)
                     console.log("search" + this.query)
@@ -167,11 +167,10 @@
                     //this.socketData = testDate.codeRecommedation;
                     this.dataCount = this.socketData.length;
                     console.log("this.dataCount:" + this.dataCount)
-                    if (this.socketData.length < this.pageSize){
+                    if (this.socketData.length < this.pageSize) {
                         this.codeData = this.socketData;
                         console.log("this.codeData:" + this.codeData);
-                        }
-                    else
+                    } else
                         this.codeData = this.socketData.slice(0, this.pageSize);
                 },
                 changepage(index) {
@@ -188,15 +187,18 @@
                     console.log('this is new');
                 },
                 copy(vm, event) {
-                    var message = {cmd:"insertSnippet", snippet:this.currentItem};
+                    var message = {
+                        cmd: "insertSnippet",
+                        snippet: this.currentItem
+                    };
                     vscode.postMessage(message);
                     console.log("复制完成" + this.currentItem);
                 },
                 analysis() {
                     console.log('this is analysis');
                 },
-                additem(item){
-                    this.currentItem=item;
+                additem(item) {
+                    this.currentItem = item;
                 }
             }
         });
@@ -232,38 +234,38 @@
 
         var ws = undefined;
 
-        
+
         window.addEventListener('message', event => {
             const message = event.data;
-                
-            if(window.WebSocket){
 
-                if(!ws){
+            if (window.WebSocket) {
+
+                if (!ws) {
                     ws = new WebSocket('ws://localhost:8765');
-                    ws.onopen = function(e){
+                    ws.onopen = function(e) {
                         console.log("连接服务器成功");
                         ws.send(message);
                         console.log("查询中：" + message);
                     }
-                    ws.onclose = function(e){
+                    ws.onclose = function(e) {
                         console.log("服务器关闭");
                     }
-                    ws.onerror = function(){
+                    ws.onerror = function() {
                         console.log("连接出错");
                     }
-                    ws.onmessage = function(e){
-                      console.log(e.data);
-                      vm.socketData = JSON.parse(e.data);
-                      vm.handleData()
-                      //var codes = e.data.parseJSON();
+                    ws.onmessage = function(e) {
+                        console.log(e.data);
+                        vm.socketData = JSON.parse(e.data);
+                        vm.handleData()
+                            //var codes = e.data.parseJSON();
                     }
-                }else{
+                } else {
                     ws.send(message);
                     console.log("查询中：" + message);
                 }
-            
+
             }
-                
+
         });
     </script>
 
