@@ -7,15 +7,15 @@ const vscode = require('vscode');
 exports.activate = function(context) {
     console.log('恭喜，您的扩展“vscode-plugin-demo”已被激活！');
     console.log(vscode);
-    require('./query')(context); // query
-    require('./clwebview')(context); // csWebview
+    //require('./query')(context); // query
+    //require('./clwebview')(context); // csWebview
     require('./cswebview')(context); // csWebview
-    require('./apiwebview')(context); // apiWebview
+    //require('./apiwebview')(context); // apiWebview
     require('./completion')(context);
 
-   // const testFn = require('./test-require-function');
-   // console.log(testFn); // vscode的日志输出不可靠，这里竟然会打印null？！
-   // testFn(1, 2);
+    // const testFn = require('./test-require-function');
+    // console.log(testFn); // vscode的日志输出不可靠，这里竟然会打印null？！
+    // testFn(1, 2);
 
     // 自动提示演示，在dependencies后面输入.会自动带出依赖
     // this.dependencies.

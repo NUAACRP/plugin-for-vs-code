@@ -36,20 +36,12 @@
             }
         },
         "commands": [{
-                "command": "extension.query",
-                "title": "Input your query"
-            },
-            {
                 "command": "extension.completion",
                 "title": "next token completion"
             },
             {
                 "command": "extension.cswebview",
                 "title": "code snippets recommendation"
-            },
-            {
-                "command": "extension.clwebview",
-                "title": "code line recommendation"
             },
             {
                 "command": "extension.demo.showWelcome",
@@ -63,21 +55,9 @@
                 "when": "editorTextFocus"
             },
             {
-                "command": "extension.query",
-                "key": "ctrl+f9",
-                "mac": "cmd+f9",
-                "when": "editorTextFocus"
-            },
-            {
                 "command": "extension.cswebview",
                 "key": "ctrl+f10",
                 "mac": "cmd+f10",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "extension.clwebview",
-                "key": "ctrl+f12",
-                "mac": "cmd+f12",
                 "when": "editorTextFocus"
             }
         ],
@@ -85,16 +65,6 @@
             "editor/context": [{
                     "when": "editorFocus",
                     "command": "extension.completion",
-                    "group": "navigation"
-                },
-                {
-                    "when": "editorFocus",
-                    "command": "extension.query",
-                    "group": "navigation"
-                },
-                {
-                    "when": "editorFocus",
-                    "command": "extension.clwebview",
                     "group": "navigation"
                 },
                 {
